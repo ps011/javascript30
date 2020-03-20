@@ -8,7 +8,7 @@
 <body>
 
   <form class="search-form">
-    <input type="text" class="search" placeholder="City or State">
+    <input type="text" class="search" placeholder="City or State" oninput="search(event)">
     <ul class="suggestions">
       <li>Filter for a city</li>
       <li>or a state</li>
@@ -16,6 +16,21 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+suggestionsUl = document.querySelector('.suggestions');
+let cities;
+fetch(endpoint).then(async resp => {
+  cities = await resp.json();
+});
+function search(e) {
+  suggestionsUl.innerHTML = '';
+  cities.forEach(city => {
+    if (city.city.includes(e.target.value)) {
+      const li = document.createElement('li');
+      li.innerText = city.city;
+      suggestionsUl.appendChild(li);
+    }
+  })
+}
 
 </script>
 </body>
