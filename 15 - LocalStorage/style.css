@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  background: url('http://wes.io/hx9M/oh-la-la.jpg') center no-repeat;
+  background: url('https://i.picsum.photos/id/1060/5598/3732.jpg') center no-repeat;
   background-size: cover;
   min-height: 100vh;
   display: flex;
@@ -65,7 +65,7 @@ h2 {
 }
 
 .plates input:checked + label:before {
-  content: '🌮';
+  content: '🥘';
 }
 
 .add-items {
