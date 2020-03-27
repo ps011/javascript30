@@ -35,6 +35,28 @@
   </style>
 
 <script>
+  const hero = document.querySelector('.hero');
+  console.log(hero.clientWidth)
+  const baseX = hero.clientWidth
+  const baseY = hero.clientHeight
+
+function shadow (e) {
+  console.log(e, baseX, baseY)
+  const h1 = document.querySelector('h1');
+  const mouseX = e.x
+  const mouseY = e.y
+  const shadowX = mouseX/baseX * 500 - 250
+  const shadowY = mouseY/baseY * 500 - 250
+  console.log(`${shadowX}px ${shadowY}px 0 red`)
+  h1.style.textShadow = `
+  ${shadowX}px ${shadowY}px 0 red,
+  ${shadowX * -1}px ${shadowY * -1}px 0 yellow,
+  ${shadowX * -1}px ${shadowY}px 0 green,
+  ${shadowX}px ${shadowY * -1}px 0 blue
+  
+  `
+}
+ document.addEventListener('mousemove', (e) => shadow(e))
 </script>
 </body>
 </html>
