@@ -43,10 +43,29 @@
 
   </style>
 
-  <ul id="bands"></ul>
+  <ul id="bands">
+  
+  </ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+let bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const bandElement = document.querySelector('#bands');
+function sort () {
+  bands = bands.sort((a, b) => {
+    return strip(a).charCodeAt(0) - strip(b).charCodeAt(0)
+  })
+  return bands;
+}
+
+function strip (word) {
+  return word.replace(/^(a |the |an )/i, '').toLowerCase()[0]
+}
+
+sort().forEach(band => {
+  const li = document.createElement('li')
+  li.innerText = band;
+  bandElement.appendChild(li);
+})
 
 
 </script>
