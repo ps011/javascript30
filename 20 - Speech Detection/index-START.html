@@ -5,13 +5,35 @@
   <title>Speech Detection</title>
 </head>
 <body>
-
+  <button class="clear-button">Clear</button>
   <div class="words" contenteditable>
   </div>
 
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new SpeechRecognition()
+  const words = document.querySelector('.words')
+  const clear = document.querySelector('.clear-button')
+  recognition.interimResults = true
+  let p = document.createElement('p')
+  words.appendChild(p)
+  recognition.addEventListener('result', e => {
+    const transcript = Array.from(e.results)
+    .map(result => result[0])
+    .map(result => result.transcript)
+    .join('')
 
+    p.textContent = transcript
+    if (e.results[0].isFinal) {
+      p = document.createElement('p')
+      words.appendChild(p)
+    }
+    console.log(transcript)
+  })
+  recognition.start();
+
+  recognition.addEventListener('end', recognition.start)
+  clear.addEventListener('click', () => { words.innerHTML = '' })
 
 </script>
 
@@ -26,6 +48,17 @@
       font-family: 'helvetica neue';
       font-weight: 200;
       font-size: 20px;
+    }
+
+    .clear-button {
+      position:absolute;
+      top: 10px;
+      right: 230px;
+      height: 30px;
+      width: 90px;
+      background-color: red;
+      color: #fff;
+      font-weight: bold;
     }
 
     .words {
