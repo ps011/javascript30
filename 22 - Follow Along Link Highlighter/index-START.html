@@ -30,6 +30,23 @@
 
     const triggers = document.querySelectorAll('a');
   const highlight = document.createElement('span');
+  highlight.classList.add('highlight');
+  highlight.style.position = 'absolute';
+  document.body.append(highlight)
+
+
+  function highlightLinks (e) {
+    const linkCoords = e.target.getBoundingClientRect();
+    console.log(linkCoords)
+    highlight.style.width = `${linkCoords.width}px`
+    highlight.style.height = `${linkCoords.height}px`
+    highlight.style.left = `${linkCoords.x}px`
+    highlight.style.top = `${linkCoords.y}px`
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('mouseover', highlightLinks)
+  })
   </script>
 </body>
 </html>
